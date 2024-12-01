@@ -2,14 +2,16 @@ namespace Aoc.Day01;
 
 public class Solution2 : ISolver
 {
-    public async ValueTask<string> SolveAsync(FileInfo inputFile) {
+    public async ValueTask<string> SolveAsync(FileInfo inputFile)
+    {
         List<int> lefts = [];
         List<int> rights = [];
 
-        foreach (var line in await inputFile.ReadAllLinesAsync()) {
+        foreach (var line in await inputFile.ReadAllLinesAsync())
+        {
             var (left, right) = line.Split("   ");
-            lefts.Add(int.Parse(left));
-            rights.Add(int.Parse(right));
+            lefts.Add(int.Parse(left, CultureInfo.InvariantCulture));
+            rights.Add(int.Parse(right, CultureInfo.InvariantCulture));
         }
 
         lefts.Sort();
@@ -18,6 +20,6 @@ public class Solution2 : ISolver
         return lefts
             .Select(l => l * rights.Count(r => r == l))
             .Sum()
-            .ToString();
+            .ToString(CultureInfo.InvariantCulture);
     }
 }

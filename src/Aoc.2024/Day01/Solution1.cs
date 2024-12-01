@@ -8,8 +8,8 @@ public class Solution1 : ISolver
 
         foreach (var line in await inputFile.ReadAllLinesAsync()) {
             var (left, right) = line.Split("   ");
-            lefts.Add(int.Parse(left));
-            rights.Add(int.Parse(right));
+            lefts.Add(int.Parse(left, CultureInfo.InvariantCulture));
+            rights.Add(int.Parse(right, CultureInfo.InvariantCulture));
         }
 
         lefts.Sort();
@@ -18,6 +18,6 @@ public class Solution1 : ISolver
         return lefts
             .Zip(rights, (l, r) => Math.Abs(l - r))
             .Sum()
-            .ToString();
+            .ToString(CultureInfo.InvariantCulture);
     }
 }
