@@ -5,13 +5,31 @@ public class Solution2 : ISolver
     public async ValueTask<string> SolveAsync(FileInfo inputFile)
     {
         var lines = await inputFile.ReadAllLinesAsync();
-        int count = lines.Count(line =>
-            IsSafe(line.Split(' ').Select(int.Parse).ToArray()) ||
-            Enumerable.Range(0, line.Split(' ').Length)
-                .Any(i => IsSafe(line.Split(' ').Where((_, index) => index != i)
-                    .Select(int.Parse).ToArray())
-                )
-        );
+        var count = 0;
+        foreach (var line in lines)
+        {
+            var levels = line.Split(' ').Select(int.Parse).ToArray();
+            var modifiedLevels = new int[levels.Length - 1];
+
+            if (IsSafe(levels))
+            {
+                count++;
+            }
+            else
+            {
+                for (var i = 0; i < levels.Length; i++)
+                {
+                    levels.AsSpan(0, i).CopyTo(modifiedLevels);
+                    levels.AsSpan(i + 1).CopyTo(modifiedLevels.AsSpan(i));
+                    if (IsSafe(modifiedLevels))
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
+        }
+
         return count.ToString();
     }
 
