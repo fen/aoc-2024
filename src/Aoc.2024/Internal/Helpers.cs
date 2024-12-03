@@ -8,11 +8,32 @@ public static partial class Helpers
         second = seq.Length == 1 ? default! : seq[1];
     }
 
+    public static void Deconstruct<T>(this IList<T> seq, out T first, out T second)
+    {
+        first = seq.First();
+        second = seq.ElementAtOrDefault(1)!;
+    }
+
     public static void Deconstruct<T>(this T[] seq, out T first, out T second, out T third)
     {
         first = seq[0];
         second = seq.Length == 1 ? default! : seq[1];
         third = seq.Length == 2 ? default! : seq[2];
+    }
+
+    public static void Deconstruct<T>(this IList<T> seq, out T first, out T second, out T third)
+    {
+        first = seq.First();
+        second = seq.ElementAtOrDefault(1)!;
+        third = seq.ElementAtOrDefault(2)!;
+    }
+
+    public static void Deconstruct<T>(this IList<T> seq, out T first, out T second, out T third, out T fourth)
+    {
+        first = seq.First();
+        second = seq.ElementAtOrDefault(1)!;
+        third = seq.ElementAtOrDefault(2)!;
+        fourth = seq.ElementAtOrDefault(3)!;
     }
 
     public static Task<string[]> ReadAllLinesAsync(this FileInfo file)

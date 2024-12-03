@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace Aoc;
 
 public static class Runner
@@ -14,12 +16,20 @@ public static class Runner
 
     private static FileInfo? GetInputFile<TSolver>(DirectoryInfo inputs, bool exampleInput)
     {
-        var (_, day, _) = typeof(TSolver).FullName!.Split('.');
+        var (_, day, solution) = typeof(TSolver).FullName!.Split('.');
+        var solutionNumber = GetSolutionNumber(solution);
+
         if (exampleInput)
         {
-            day = $"{day}-example";
+            day = $"{day}-example{solutionNumber}";
         }
 
         return inputs.GetFiles(day).FirstOrDefault();
+    }
+
+    private static int GetSolutionNumber(string solution)
+    {
+        var match = Regex.Match(solution, @"\d+");
+        return int.Parse(match.Value);
     }
 }
