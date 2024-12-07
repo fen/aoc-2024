@@ -10,8 +10,6 @@ public class Solution1 : ISolver
     public async ValueTask<string> SolveAsync(FileInfo inputFile)
     {
         var lines = await inputFile.ReadAllLinesAsync();
-
-
         char[][] charArray = new char[lines.Length][];
         for (int i = 0; i < lines.Length; i++)
         {

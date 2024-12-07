@@ -10,6 +10,7 @@ public class Solution2 : ISolver
     static long CalculateTotalCalibration(string[] equations)
     {
         return equations
+            .AsParallel()
             .Select(equation => equation.Split([':', ' '], StringSplitOptions.RemoveEmptyEntries))
             .Select(parts => (TestValue: long.Parse(parts[0]), Numbers: parts.Skip(1).Select(long.Parse).ToArray()))
             .Where(tuple => CanMatchTestValue(tuple.TestValue, tuple.Numbers))
@@ -23,7 +24,7 @@ public class Solution2 : ISolver
 
         foreach (var combination in GenerateOperatorCombinations(operators, numOperators))
         {
-            if (EvaluateExpression(numbers, combination) == testValue)
+            if (EvaluateExpression(numbers, combination, testValue))
             {
                 return true;
             }
@@ -32,7 +33,7 @@ public class Solution2 : ISolver
         return false;
     }
 
-    private static IEnumerable<string> GenerateOperatorCombinations(string[] operators, int numOperators)
+    static IEnumerable<string> GenerateOperatorCombinations(string[] operators, int numOperators)
     {
         return GenerateOperatorCombinationsRecursive("", operators, numOperators);
 
@@ -57,7 +58,7 @@ public class Solution2 : ISolver
         }
     }
 
-    static long EvaluateExpression(long[] numbers, string operators)
+    static bool EvaluateExpression(long[] numbers, string operators, long testValue)
     {
         var result = numbers[0];
         for (int i = 1, j = 0; j < operators.Length; i++, j++)
@@ -66,17 +67,25 @@ public class Solution2 : ISolver
             {
                 '+' => result + numbers[i],
                 '*' => result * numbers[i],
-                '|' when j + 1 < operators.Length && operators[j + 1] == '|' =>
-                    long.Parse($"{result}{numbers[i]}"),
+                '|' => ConcatenateDigits(result, numbers[i]),
                 _ => result
             };
 
             if (operators[j] == '|' && j + 1 < operators.Length && operators[j + 1] == '|')
-            {
                 j++; // Skip additional '|'
-            }
+
+            if (result > testValue)
+                return false;
         }
 
-        return result;
+        return result == testValue;
+
+        static long ConcatenateDigits(long a, long b)
+        {
+            long scale = 1;
+            while (scale <= b)
+                scale *= 10;
+            return a * scale + b;
+        }
     }
 }
