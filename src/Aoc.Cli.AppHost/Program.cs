@@ -21,4 +21,7 @@ bool exampleInput = args switch
 // await SolveAsync<Aoc.Day05.Solution2>(inputs, exampleInput);
 
 // await SolveAsync<Aoc.Day06.Solution1>(inputs, exampleInput);
-await SolveAsync<Aoc.Day06.Solution2>(inputs, exampleInput);
+// await SolveAsync<Aoc.Day06.Solution2>(inputs, exampleInput);
+
+await SolveAsync<Aoc.Day07.Solution1>(inputs, exampleInput);
+await SolveAsync<Aoc.Day07.Solution2>(inputs, exampleInput);
