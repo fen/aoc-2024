@@ -5,44 +5,44 @@ public class Solution1 : ISolver
     public async ValueTask<string> SolveAsync(FileInfo inputFile)
     {
         var lines = await inputFile.ReadAllLinesAsync();
+        int safeCount = 0;
 
-        int count = 0;
         foreach (var line in lines)
         {
-            var levels = line.Split(' ')
-                .Select(int.Parse).ToArray();
+            var levels = line.Split(' ').Select(int.Parse).ToArray();
 
-            bool safe = true;
-            bool? increasing = null;
-            foreach (var t in levels.AdjacentPairs())
+            if (AreLevelsSafe(levels))
             {
-                var (a, b) = t;
-                var c  = a - b;
-                if (Math.Abs(c) is >= 1 and <= 3)
-                {
-                    if (increasing is null)
-                    {
-                        increasing = c > 0;
-                    }
-                    else if (increasing.Value != c > 0)
-                    {
-                        safe = false;
-                        break;
-                    }
-
-                    continue;
-                }
-
-                safe = false;
-                break;
-            }
-
-            if (safe)
-            {
-                count++;
+                safeCount++;
             }
         }
 
-        return count.ToString(CultureInfo.InvariantCulture);
+        return safeCount.ToString(CultureInfo.InvariantCulture);
+    }
+
+    private static bool AreLevelsSafe(int[] levels)
+    {
+        bool? isIncreasing = null;
+
+        foreach (var (first, second) in levels.AdjacentPairs())
+        {
+            var difference = first - second;
+
+            if (Math.Abs(difference) < 1 || Math.Abs(difference) > 3)
+            {
+                return false;
+            }
+
+            if (isIncreasing is null)
+            {
+                isIncreasing = difference > 0;
+            }
+            else if (isIncreasing != (difference > 0))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -9,15 +9,7 @@ public class Solution1 : ISolver
 {
     public async ValueTask<string> SolveAsync(FileInfo inputFile)
     {
-        var lines = await inputFile.ReadAllLinesAsync();
-        char[][] charArray = new char[lines.Length][];
-        for (int i = 0; i < lines.Length; i++)
-        {
-            charArray[i] = lines[i].ToCharArray();
-        }
-
-        var map = new Map(charArray);
-
+        var map = new Map(await inputFile.ReadCharMapAsync());
         return map.Run().ToString();
     }
 }

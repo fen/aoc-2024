@@ -36,6 +36,19 @@ public static partial class Helpers
         fourth = seq.ElementAtOrDefault(3)!;
     }
 
+    public static async Task<char[][]> ReadCharMapAsync(this FileInfo file)
+    {
+        var lines =  await File.ReadAllLinesAsync(file.FullName);
+
+        var charArray = new char[lines.Length][];
+        for (var i = 0; i < lines.Length; i++)
+        {
+            charArray[i] = lines[i].ToCharArray();
+        }
+
+        return charArray;
+    }
+
     public static Task<string[]> ReadAllLinesAsync(this FileInfo file)
     {
         return File.ReadAllLinesAsync(file.FullName);

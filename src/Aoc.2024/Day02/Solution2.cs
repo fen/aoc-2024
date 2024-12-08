@@ -8,29 +8,40 @@ public class Solution2 : ISolver
         var count = 0;
         foreach (var line in lines)
         {
-            var levels = line.Split(' ').Select(int.Parse).ToArray();
-            var modifiedLevels = new int[levels.Length - 1];
-
-            if (IsSafe(levels))
+            var levels = ParseLevels(line);
+            if (IsSafe(levels) || CanBeSafeByRemovingOneLevel(levels))
             {
                 count++;
-            }
-            else
-            {
-                for (var i = 0; i < levels.Length; i++)
-                {
-                    levels.AsSpan(0, i).CopyTo(modifiedLevels);
-                    levels.AsSpan(i + 1).CopyTo(modifiedLevels.AsSpan(i));
-                    if (IsSafe(modifiedLevels))
-                    {
-                        count++;
-                        break;
-                    }
-                }
             }
         }
 
         return count.ToString();
+    }
+
+    private static int[] ParseLevels(string line)
+    {
+        return line.Split(' ').Select(int.Parse).ToArray();
+    }
+
+    private static bool CanBeSafeByRemovingOneLevel(int[] levels)
+    {
+        var modifiedLevels = new int[levels.Length - 1];
+        for (int i = 0; i < levels.Length; i++)
+        {
+            if (IsSafeWithRemoval(levels, modifiedLevels, i))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool IsSafeWithRemoval(int[] levels, int[] modifiedLevels, int index)
+    {
+        levels.AsSpan(0, index).CopyTo(modifiedLevels);
+        levels.AsSpan(index + 1).CopyTo(modifiedLevels.AsSpan(index));
+        return IsSafe(modifiedLevels);
     }
 
     private static bool IsSafe(int[] levels)

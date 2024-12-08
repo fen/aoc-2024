@@ -2,11 +2,13 @@
 
 public class Solution1 : ISolver
 {
-    public async ValueTask<string> SolveAsync(FileInfo inputFile) {
+    public async ValueTask<string> SolveAsync(FileInfo inputFile)
+    {
         List<int> lefts = [];
         List<int> rights = [];
 
-        foreach (var line in await inputFile.ReadAllLinesAsync()) {
+        foreach (var line in await inputFile.ReadAllLinesAsync())
+        {
             var (left, right) = line.Split("   ");
             lefts.Add(int.Parse(left, CultureInfo.InvariantCulture));
             rights.Add(int.Parse(right, CultureInfo.InvariantCulture));

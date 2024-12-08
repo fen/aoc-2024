@@ -45,20 +45,26 @@ public class Solution2 : ISolver
     private static bool Find(string[] lines, int row, int col, string target, int rowDir, int colDir)
     {
         var targetLength = target.Length;
-        var rows = lines.Length;
-        var cols = lines[0].Length;
+        var totalRows = lines.Length;
+        var totalCols = lines[0].Length;
 
         for (var i = 0; i < targetLength; i++)
         {
-            var newRow = row + i * rowDir;
-            var newCol = col + i * colDir;
+            var currentRow = row + i * rowDir;
+            var currentCol = col + i * colDir;
 
-            if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols || lines[newRow][newCol] != target[i])
+            if (IsOutOfBounds(currentRow, currentCol, totalRows, totalCols) ||
+                lines[currentRow][currentCol] != target[i])
             {
                 return false;
             }
         }
 
         return true;
+
+        static bool IsOutOfBounds(int row, int col, int totalRows, int totalCols)
+        {
+            return row < 0 || row >= totalRows || col < 0 || col >= totalCols;
+        }
     }
 }
