@@ -31,3 +31,6 @@ await SolveAsync<Aoc.Day08.Solution2>(inputs, exampleInput);
 
 await SolveAsync<Aoc.Day09.Solution1>(inputs, exampleInput);
 await SolveAsync<Aoc.Day09.Solution2>(inputs, exampleInput);
+
+await SolveAsync<Aoc.Day10.Solution1>(inputs, exampleInput);
+await SolveAsync<Aoc.Day10.Solution2>(inputs, exampleInput);
