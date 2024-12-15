@@ -54,6 +54,11 @@ public static partial class Helpers
         return File.ReadAllLinesAsync(file.FullName);
     }
 
+    public static Task<string> ReadAllTextAsync(this FileInfo file)
+    {
+        return File.ReadAllTextAsync(file.FullName);
+    }
+
     /// <summary>
     /// Returns an enumerable sequence of tuples where each tuple contains two consecutive elements from the input sequence.
     /// </summary>

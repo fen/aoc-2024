@@ -37,3 +37,15 @@ await SolveAsync<Aoc.Day10.Solution2>(inputs, exampleInput);
 
 await SolveAsync<Aoc.Day11.Solution1>(inputs, exampleInput);
 await SolveAsync<Aoc.Day11.Solution2>(inputs, exampleInput);
+
+await SolveAsync<Aoc.Day12.Solution1>(inputs, exampleInput);
+await SolveAsync<Aoc.Day12.Solution2>(inputs, exampleInput);
+
+await SolveAsync<Aoc.Day13.Solution1>(inputs, exampleInput);
+await SolveAsync<Aoc.Day13.Solution2>(inputs, exampleInput);
+
+await SolveAsync<Aoc.Day14.Solution1>(inputs, exampleInput);
+await SolveAsync<Aoc.Day14.Solution2>(inputs, exampleInput);
+
+await SolveAsync<Aoc.Day15.Solution1>(inputs, exampleInput);
+await SolveAsync<Aoc.Day15.Solution2>(inputs, exampleInput);
