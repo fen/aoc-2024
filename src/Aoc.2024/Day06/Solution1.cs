@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Aoc.Day06;
+﻿namespace Aoc.Day06;
 
 using Direction = (int X, int Y);
 using Position = (int X, int Y);
