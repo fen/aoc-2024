@@ -68,5 +68,8 @@ bool exampleInput = args switch
 // await SolveAsync<Aoc.Day21.Solution1>(inputs, exampleInput);
 // await SolveAsync<Aoc.Day21.Solution2>(inputs, exampleInput);
 
-await SolveAsync<Aoc.Day22.Solution1>(inputs, exampleInput);
-await SolveAsync<Aoc.Day22.Solution2>(inputs, exampleInput);
+// await SolveAsync<Aoc.Day22.Solution1>(inputs, exampleInput);
+// await SolveAsync<Aoc.Day22.Solution2>(inputs, exampleInput);
+
+await SolveAsync<Aoc.Day23.Solution1>(inputs, exampleInput);
+await SolveAsync<Aoc.Day23.Solution2>(inputs, exampleInput);
