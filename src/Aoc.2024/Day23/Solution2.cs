@@ -1,4 +1,6 @@
-﻿namespace Aoc.Day23;
+﻿using System.Runtime.Intrinsics.X86;
+
+namespace Aoc.Day23;
 
 public class Solution2 : ISolver
 {

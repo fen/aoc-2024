@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Aoc.Day13;
+﻿namespace Aoc.Day13;
 
 public class Solution2 : ISolver
 {
